@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { JobsHeader } from './components/jobsHeader';
+import { JobsList } from './components/jobsList';
+import  getData  from './service';
+import FilterContext from './context/FilterContext';
+
 
 function App() {
+  const [filters,setFilters]=useState<string[]>([]);
+  const jobs=getData();
+
+  function handleClickFilter(filter:string){
+    if(!filters.includes(filter)){
+      setFilters([...filters,filter]);
+    }
+  }
+  function handleDeleteFilter(filter:string){
+    let result=filters.filter(item=>item !==filter);
+    setFilters(result);
+  }
+  function handleDeleteAll(){
+    setFilters([]);
+  }
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <JobsHeader filters={filters} onDeleteFilter={handleDeleteFilter} onDeleteAll={handleDeleteAll}/>
+      <FilterContext.Provider value={{handleClickFilter}}>
+        <JobsList jobs={jobs} filters={filters}/>        
+      </FilterContext.Provider>
     </div>
   );
 }
