@@ -171,7 +171,7 @@ body{
 }
 
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
      .job-card{
         margin: 50px 0px 35px 0px;
         flex-direction: column;        

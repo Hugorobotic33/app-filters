@@ -19,7 +19,7 @@ export function JobsHeader({filters,onDeleteFilter,onDeleteAll}:Props){
                            <div className="badge" key={filter}>                              
                               <p>{filter}</p>                                                              
                                  <div className="remove" onClick={()=>onDeleteFilter(filter)}>
-                                  <img src="/images/icon-remove.svg" alt="" height="12" width="12" />
+                                  <img src="./images/icon-remove.svg" alt="" height="12" width="12" />
                                  </div>
                             </div>
                            ))
